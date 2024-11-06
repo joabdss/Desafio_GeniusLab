@@ -1,0 +1,33 @@
+"""
+URL configuration for GeniusLAB_novo project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+# geniuslab_novo/urls.py (arquivo principal de urls)
+from django.contrib import admin
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from GeniusLAB_novo.livros.views import LivroViewSet
+from GeniusLAB_novo.usuarios.views import UsuarioViewSet
+from GeniusLAB_novo.emprestimos.views import EmprestimoViewSet
+
+router = DefaultRouter()
+router.register(r'livros', LivroViewSet)
+router.register(r'usuarios', UsuarioViewSet)
+router.register(r'emprestimos', EmprestimoViewSet)
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
+]
